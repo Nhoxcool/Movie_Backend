@@ -1,3 +1,5 @@
+const nodemailer = require('nodemailer');
+
 exports.generateOTP = (opt_length = 6) => {
     let OTP = '';
     for(let i = 1; i <= opt_length; i++){
