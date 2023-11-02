@@ -178,7 +178,7 @@ exports.resetPassword = async (req, res) => {
   });
 }
 
-exports.signIn = async (req, res) => {
+exports.signIn = async (req, res, next) => {
   const {email, password} = req.body;
 
   const user = await User.findOne({email});
@@ -192,4 +192,5 @@ exports.signIn = async (req, res) => {
   const jwtToken = jwt.sign({userId: _id}, process.env.JWT_SECRET);
 
   res.json({user: {id: _id, name, email, token: jwtToken}})
+
 }
