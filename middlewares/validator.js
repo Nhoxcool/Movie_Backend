@@ -3,11 +3,11 @@ const {check, validationResult} = require('express-validator');
 exports.userValidator = [
     check('name').trim().not().isEmpty().withMessage('Name is missing! '),
     check('email').normalizeEmail().isEmail().withMessage('Email is invalid! '),
-    check('password').trim().not().isEmpty().withMessage('Password is missing! ').isLength({min: 8, max: 20}).withMessage('Password must be 8 to 20 characters long')
+    check('password').trim().not().isEmpty().withMessage('Password is missing! ').isLength({min: 8, max: 20}).matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/, "i").withMessage('Password should be combination of one uppercase , one lower case, one special char, one digit and min 8 , max 20 characters long'),
 ];
 
 exports.validatePassword = [
-   check('newPassword').trim().not().isEmpty().withMessage('Password is missing! ').isLength({min: 8, max: 20}).withMessage('Password must be 8 to 20 characters long')
+   check('newPassword').trim().not().isEmpty().withMessage('Password is missing! ').isLength({min: 8, max: 20}).matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/, "i").withMessage('Password should be combination of one uppercase , one lower case, one special char, one digit and min 8 , max 20 characters long'),
 ]
 
 exports.signinValidator = [
