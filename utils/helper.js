@@ -15,3 +15,7 @@ exports.generateRandomByte = () => {
         })
     })
 }
+
+exports.hadleNotFound = (req, res) => {
+    this.sendError(res, 'Not Fonud', 404)
+}
