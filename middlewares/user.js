@@ -1,6 +1,6 @@
 const { isValidObjectId } = require('mongoose');
 const passwordResetToken = require('../models/passwordResetToken');
-const { sendError } = require('../routes/helper');
+const { sendError } = require('../utils/helper');
 exports.isValidPassResetToken = async (req, res, next) => {
     const {token, userId} = req.body
 

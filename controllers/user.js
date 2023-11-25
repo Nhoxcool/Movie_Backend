@@ -4,7 +4,7 @@ const emailVarificationToken = require('../models/emailVerificationToken');
 const passwordResetToken = require('../models/passwordResetToken');
 const { isValidObjectId } = require('mongoose');
 const { generateOTP, generateMailTransporter } = require('../utils/mail');
-const { sendError, generateRandomByte } = require('../routes/helper');
+const { sendError, generateRandomByte } = require('../utils/helper');
 const user = require('../models/user');
 
 
