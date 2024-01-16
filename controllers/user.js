@@ -149,7 +149,7 @@ exports.forgetPassword = async (req, res) => {
   });
   await newpasswordResetToken.save();
 
-  var resetPasswordUrl = `http://localhost:3000/reset-password?token=${token}&id=${user._id}`;
+  var resetPasswordUrl = `http://localhost:3000/auth/reset-password?token=${token}&id=${user._id}`;
 
   const transport = generateMailTransporter();
 
@@ -204,14 +204,14 @@ exports.resetPassword = async (req, res) => {
   });
 };
 
-exports.signIn = async (req, res, next) => {
+exports.signIn = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
-  if (!user) return sendError(res, "Email/Password mismatch!");
+  if (!user) return sendError(res, "Email mismatch!");
 
-  const matched = user.comparePassword(password);
-  if (!matched) return sendError(res, "Email/Password mismatch!");
+  const matched = await user.comparePassword(password);
+  if (!matched) return sendError(res, "Password mismatch!");
 
   const { _id, name } = user;
   const jwtToken = jwt.sign({ userId: _id }, process.env.JWT_SECRET);
